@@ -9,12 +9,24 @@ class Board
     cells[y][x]
   end
 
+  def live?(x, y)
+    status(x, y) == :live
+  end
+
+  def dead?(x, y)
+    status(x, y) == :dead
+  end
+
+  def neighbours_statuses(x, y)
+    neighbours(x, y).map { |xx, yy| status(xx, yy) }
+  end
+
+  private
+
   def neighbours(x, y)
     top_neighbours(x, y) + middle_neighbours(x, y) + bottom_neighbours(x, y)
   end
 
-  private
-  
   def top_neighbours(x, y)
     [
       [x - 1, y + 1],
