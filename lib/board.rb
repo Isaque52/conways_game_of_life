@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(3) { Array.new(3) { :dead } }
+    @cells = Array.new(height) { Array.new(width) { :dead } }
   end
 
   def status(x, y)
@@ -32,14 +32,14 @@ class Board
       [x - 1, y + 1],
       [x, y + 1],
       [x + 1, y + 1]
-    ]
+    ].reject { |cell| cell[0].negative? || cell[1].negative? || cell[1] >= height || cell[0] >= width }
   end
 
   def middle_neighbours(x, y)
     [
       [x - 1, y],
       [x + 1, y]
-    ]
+    ].reject { |cell| cell[0].negative? || cell[1].negative? || cell[1] >= height || cell[0] >= width }
   end
 
   def bottom_neighbours(x, y)
@@ -47,6 +47,14 @@ class Board
       [x - 1, y - 1],
       [x, y - 1],
       [x + 1, y - 1]
-    ]
+    ].reject { |cell| cell[0].negative? || cell[1].negative? || cell[1] >= height || cell[0] >= width }
+  end
+
+  def width
+    3
+  end
+
+  def height
+    3
   end
 end

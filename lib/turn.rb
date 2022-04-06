@@ -9,11 +9,18 @@ class Turn
     puts "reading current board"
     p current_board
     puts "iterate over current board"
-    current_board.cells.each do |row|
-      row.each do |cell|
-        puts "this cell value is #{cell}"
+    current_board.cells.each_with_index do |row, y|
+      row.each_with_index do |cell, x|
+        puts "this cell value is #{cell}-coords#{x} #{y}"
+        puts "this cell-survival rule #{rules(current_board).survive?(x, y)}"
       end
     end
     self.turn_number += 1
+  end
+
+  private
+
+  def rules(current_board)
+    @rules ||= Rules.new(current_board)
   end
 end

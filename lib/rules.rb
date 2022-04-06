@@ -13,6 +13,8 @@ class Rules
   private
 
   def live_neighbours(x, y)
-    current_board.neighbours_statuses(x, y).count(:live)
+    current_board.neighbours_statuses(x, y).tap do |status_array|
+      p status_array
+    end.count(:live)
   end
 end
