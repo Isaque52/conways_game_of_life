@@ -5,6 +5,10 @@ class Board
     @cells = Array.new(height) { Array.new(width) { :dead } }
   end
 
+  def update_status(x, y, new_state)
+    cells[y][x] = new_state
+  end
+
   def status(x, y)
     cells[y][x]
   end
